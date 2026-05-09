@@ -1,13 +1,14 @@
-import { Card, CardContent, CardFooter } from '@/shared/components/ui/card';
-import type { Project } from '@/feature/project/list/model/project';
-import { Button } from '@/shared/components/ui/button';
-import { useGlobalContext } from '@/shared/context';
-import { TrashIcon } from 'lucide-react';
+import { Card, CardContent, CardFooter } from "@/shared/components/ui/card";
+import type { Project } from "@/feature/project/list/model/project";
+import { Button } from "@/shared/components/ui/button";
+import { useGlobalContext } from "@/shared/context";
+import { TrashIcon } from "lucide-react";
 
 function ProjectCard({ project }: { project: Project }) {
   const { removeProject, setActiveProject } = useGlobalContext();
   return (
     <Card
+      data-testid="project-card"
       className="flex flex-row justify-between hover:bg-accent cursor-pointer w-full"
       onClick={() => {
         setActiveProject(project);
@@ -27,6 +28,7 @@ function ProjectCard({ project }: { project: Project }) {
       <CardFooter className="flex justify-end">
         <Button
           type="button"
+          aria-label="Delete project"
           variant="ghost"
           size="icon"
           onClick={(e) => {

@@ -105,8 +105,9 @@ describe("globalReducer", () => {
     expect(result.tasks[0].description).toBe("Updated task");
   });
 
-  //A BUG BUSTED!!! UPDATE_PROJECT_TASKS_COUNT would delete any project with no task in it, including newly created ones. However it is never called in the app as is. This action of updating tasks count is performed by ADD_TASK and withSyncedTaskCounts
-  // BUG FIX: remove the filter >0 from the function
+  //CODE SMELL (and a bit of a bug)!!! UPDATE_PROJECT_TASKS_COUNT would delete any project with no task in it, including newly created ones. However it is never called in the app as is. This action of updating tasks count is performed by ADD_TASK and withSyncedTaskCounts
+  // BUG FIX: remove the filter >0 from the function 
+  //But would make sense to clear out the SMELL alltogether
   it("UPDATE_PROJECT_TASKS_COUNT does not remove project when tasksCount is 0", () => {
     expect(stateWithProject.projects.length).toBe(1);
     const result = globalReducer(stateWithProject, {
