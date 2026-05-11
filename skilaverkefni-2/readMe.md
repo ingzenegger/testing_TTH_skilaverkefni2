@@ -6,6 +6,8 @@
 
 ---
 
+---
+
 ## Kröfur (prófunarhluti)
 
 Byggðu ofan á kóðann úr skilaverkefni-1 og bættu við eftirfarandi.
