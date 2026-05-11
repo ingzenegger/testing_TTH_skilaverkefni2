@@ -111,6 +111,11 @@ export const globalReducer: Reducer<GlobalState, GlobalAction> = (
       return {
         ...state,
         projects,
+        //missing piece added to remove child tasks:
+        tasks: state.tasks.filter(
+          (t) => t.projectId !== action.payload.projectId,
+        ),
+        //BUG fixed
         activeProject: syncActiveProject(state.activeProject, projects),
       };
     }

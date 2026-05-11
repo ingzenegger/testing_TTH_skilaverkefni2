@@ -19,6 +19,11 @@ const testTask: Task = {
 };
 const stateWithProject = { ...initialState, projects: [testProject] };
 const stateWithTask = { ...initialState, tasks: [testTask] };
+const stateWithProjectAndTask = {
+  ...initialState,
+  projects: [testProject],
+  tasks: [testTask],
+};
 
 describe("globalReducer", () => {
   //ADD and REMOVE project tests
@@ -37,6 +42,17 @@ describe("globalReducer", () => {
       payload: { projectId: testProject.id },
     });
     expect(result.projects.length).toBe(0);
+  });
+
+  //test exposing a BUG, there is no function removing child tasks
+  it("REMOVE_PROJECT also remoces all tasks belonging to that project", () => {
+    expect(stateWithProjectAndTask.tasks.length).toBe(1);
+    const result = globalReducer(stateWithProjectAndTask, {
+      type: "REMOVE_PROJECT",
+      payload: { projectId: testProject.id },
+    });
+    expect(result.projects.length).toBe(0);
+    expect(result.tasks.length).toBe(0);
   });
 
   //ADD and REMOVE task tests
@@ -106,7 +122,7 @@ describe("globalReducer", () => {
   });
 
   //CODE SMELL (and a bit of a bug)!!! UPDATE_PROJECT_TASKS_COUNT would delete any project with no task in it, including newly created ones. However it is never called in the app as is. This action of updating tasks count is performed by ADD_TASK and withSyncedTaskCounts
-  // BUG FIX: remove the filter >0 from the function 
+  // BUG FIX: remove the filter >0 from the function
   //But would make sense to clear out the SMELL alltogether
   it("UPDATE_PROJECT_TASKS_COUNT does not remove project when tasksCount is 0", () => {
     expect(stateWithProject.projects.length).toBe(1);
