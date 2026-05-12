@@ -51,6 +51,7 @@ const mockContextWithTasks = {
 
 const meta = {
   component: Tasks,
+  tags: ["autodocs"],
 } satisfies Meta<typeof Tasks>;
 
 export default meta;

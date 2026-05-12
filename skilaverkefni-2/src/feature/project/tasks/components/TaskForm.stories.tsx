@@ -17,6 +17,12 @@ const mockContextValue = {
   updateTask: () => {},
 } as unknown as GlobalContextValue;
 
+const mockContextNoProject = {
+  activeProject: null,
+  addTask: () => {},
+  updateTask: () => {},
+} as unknown as GlobalContextValue;
+
 const meta = {
   component: TaskForm,
   decorators: [
@@ -29,6 +35,9 @@ const meta = {
     ),
   ],
   tags: ["autodocs"],
+  parameters: {
+    layout: "padded",
+  },
 } satisfies Meta<typeof TaskForm>;
 
 export default meta;
@@ -53,4 +62,21 @@ export const EditTask: Story = {
       projectId: "1A",
     },
   },
+};
+
+//add Task button should be unavailable:
+export const NoActiveProject: Story = {
+  args: {
+    onClose: fn(),
+    taskToEdit: null,
+  },
+  decorators: [
+    (Story) => (
+      <GlobalContext.Provider value={mockContextNoProject}>
+        <Dialog open={true}>
+          <Story />
+        </Dialog>
+      </GlobalContext.Provider>
+    ),
+  ],
 };
