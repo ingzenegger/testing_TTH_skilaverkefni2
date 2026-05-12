@@ -8,6 +8,7 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
+    "postinstall": "playwright install --with-deps",
     "test": "vitest",
     "test:ci": "vitest run",
     "storybook": "storybook dev -p 6006",
