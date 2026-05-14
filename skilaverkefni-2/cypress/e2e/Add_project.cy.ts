@@ -1,6 +1,6 @@
 describe("Add project", () => {
   it("adds a project", () => {
-    cy.visit("http://localhost:5173/");
+    cy.visit("/");
     cy.contains("Add project").click();
     cy.contains("Project name").parent().find("input").type("My project");
     cy.contains("Description")

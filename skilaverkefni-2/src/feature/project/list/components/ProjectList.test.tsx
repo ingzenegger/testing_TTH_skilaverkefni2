@@ -24,6 +24,8 @@ vi.mock("@/feature/project/chart/components/Chart", () => ({
 }));
 
 const mockClearActiveProject = vi.fn();
+
+//test keep complaining about the "key" not being unique (still pass, but logs look annoying), claude suggested to have a function in the ID instead of "1A", "1B" etc but that is useless because the key is still project.id in the map...:
 const createMockProjectsArray = () => [
   {
     description: "Project for testing",
