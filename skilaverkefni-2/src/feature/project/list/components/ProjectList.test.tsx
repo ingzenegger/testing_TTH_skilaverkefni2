@@ -24,22 +24,22 @@ vi.mock("@/feature/project/chart/components/Chart", () => ({
 }));
 
 const mockClearActiveProject = vi.fn();
-const mockProjectsArray = [
+const createMockProjectsArray = () => [
   {
     description: "Project for testing",
-    id: "1A",
+    id: crypto.randomUUID(),
     name: "Test project 1",
     tasksCount: 0,
   },
   {
     description: "Project for testing",
-    id: "1B",
+    id: crypto.randomUUID(),
     name: "Test project 2",
     tasksCount: 0,
   },
   {
     description: "Project for testing",
-    id: "1C",
+    id: crypto.randomUUID(),
     name: "Test project 3",
     tasksCount: 0,
   },
@@ -63,7 +63,7 @@ describe("ProjectList", () => {
 
   it("displays correct number of ProjectCards", () => {
     mockUseGlobalContext.mockReturnValue({
-      projects: mockProjectsArray,
+      projects: createMockProjectsArray(),
       activeProject: null,
       clearActiveProject: mockClearActiveProject,
     });
@@ -73,9 +73,10 @@ describe("ProjectList", () => {
   });
   //redundant as this component only renders if there is no activeProject:
   it("renders back button when activeProject is truthy", () => {
+    const projects = createMockProjectsArray();
     mockUseGlobalContext.mockReturnValue({
-      projects: mockProjectsArray,
-      activeProject: mockProjectsArray[0],
+      projects: projects,
+      activeProject: projects[0],
       clearActiveProject: mockClearActiveProject,
     });
     render(<ProjectList />);
@@ -84,7 +85,7 @@ describe("ProjectList", () => {
 
   it("renders Form Dialog when AddProject is clicked", async () => {
     mockUseGlobalContext.mockReturnValue({
-      projects: mockProjectsArray,
+      projects: createMockProjectsArray(),
       activeProject: null,
       clearActiveProject: mockClearActiveProject,
     });

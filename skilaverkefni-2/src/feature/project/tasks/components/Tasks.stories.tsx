@@ -49,6 +49,11 @@ const mockContextWithTasks = {
   ],
 } as unknown as GlobalContextValue;
 
+const mockContextWithoutActiveProject = {
+  activeProject: null,
+  tasks: [],
+} as unknown as GlobalContextValue;
+
 const meta = {
   component: Tasks,
   tags: ["autodocs"],
@@ -81,7 +86,7 @@ export const WithTasks: Story = {
 export const NoProject: Story = {
   decorators: [
     (Story) => (
-      <GlobalContext.Provider value={{ activeProject: null }}>
+      <GlobalContext.Provider value={mockContextWithoutActiveProject}>
         <Story />
       </GlobalContext.Provider>
     ),
