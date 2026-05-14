@@ -46,11 +46,12 @@ function Tasks() {
           {activeProject ? (
             <TaskTable
               projectId={activeProject.id}
+              //BUG FIX to open in edit form
               onEditTask={(task) => {
                 setEditingTask(task);
                 setTaskFormOpen(true);
               }}
-              // BUG: onEditTask={() => {
+              // onEditTask={() => {
               //   setTaskFormOpen(true);
               // }}
             />
