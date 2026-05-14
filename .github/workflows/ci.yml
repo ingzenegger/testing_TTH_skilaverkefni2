@@ -30,3 +30,21 @@ jobs:
 
       - name: Run Vitest
         run: npm run test:ci
+
+  cypress-run:
+    name: Cypress
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: skilaverkefni-2
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      # Install npm dependencies, cache them correctly
+      # and run all Cypress tests
+      - name: Cypress run
+        uses: cypress-io/github-action@v7
+        with:
+          working-directory: skilaverkefni-2
+          build: npm run build
+          start: npm run preview
