@@ -48,3 +48,6 @@ jobs:
           working-directory: skilaverkefni-2
           build: npm run build
           start: npm run preview
+          wait-on: http://localhost:5173
+          wait-on-timeout: 120
+         
